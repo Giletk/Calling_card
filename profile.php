@@ -50,7 +50,7 @@
 <div class="container col-4">
     <h2>Привет, <?php echo $_COOKIE['User']; ?>!</h2>
     <h3>Поделитесь своими мыслями!</h3>
-    <form action="profile.php" method="POST">
+    <form action="profile.php" method="POST" enctype="multipart/form-data" name="upload">
         <div class="form-group">
             <label for="title">Заголовок: </label>
             <input type="text" id="title" name="title" required>
@@ -59,6 +59,10 @@
             <label for="content">Текст: </label>
             <textarea id="content" name="content" rows="4" style="width: calc(100% - 25px);" required></textarea>
             <!-- Width is calculated to be 100% minus the width of the scrollbar -->
+        </div>
+        <div class="form-group">
+            <label for="file">Выберите файл: </label>
+            <input type="file" id="file" name="file">
         </div>
         <div class="form-group">
             <input type="submit" value="Submit Post">
@@ -113,9 +117,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO posts (title, main_text) VALUES ('$title', '$content')";
     // Execute query
     if (mysqli_query($link, $sql)) {
-        echo "New record created successfully";
+        echo "New record created successfully; ";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($link);
+    }
+
+    if(!empty($_FILES["file"]))
+    {
+        if (((@$_FILES["file"]["type"] == "image/gif") || (@$_FILES["file"]["type"] == "image/jpeg")
+        || (@$_FILES["file"]["type"] == "image/jpg") || (@$_FILES["file"]["type"] == "image/pjpeg")
+        || (@$_FILES["file"]["type"] == "image/x-png") || (@$_FILES["file"]["type"] == "image/png"))
+        && (@$_FILES["file"]["size"] < 102400))
+        {
+            move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
+            echo "File uploaded successfuly in:  " . "upload/" . $_FILES["file"]["name"];
+        }
+        else
+        {
+            echo "Upload failed! ";
+        }
     }
 }
 
