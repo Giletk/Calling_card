@@ -92,11 +92,51 @@ h1 {
 .container {
   margin-top: 30px;
 }
+.form {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
 .photo_caption{
   text-align: right;
 }
 .row {
   /* 123123123 */
+}
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.form-group label {
+  flex: 0 0 auto;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.form-group input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.form-group input[type="submit"]:hover {
+  background-color: #0056b3;
 }
 .col-8 {
 }
