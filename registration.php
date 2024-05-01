@@ -42,7 +42,7 @@ require_once("db.php");
 
 echo "started";
 // Database configuration
-$servername = "127.0.0.1";
+$servername = "db";
 $username = "root";
 $password = "kali";
 $dbName = "MyApp";
